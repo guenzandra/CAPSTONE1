@@ -250,7 +250,7 @@
 
   <!----------- SA NAVBAR RIGHT TO ------------>
   <div class="cart-sidebar" id="cartSidebar">
-    <h3>My Cart</h3>
+    <h3>My Order</h3>
     <ul id="cartItems"></ul>
     <p>Total: <span id="cartTotal">0.00</span></p>
     <button class="checkout-btn">Check Out</button>
@@ -269,10 +269,24 @@
       box-shadow: -3px 0 5px rgba(0, 0, 0, 0.2);
       transition: right 0.3s ease-in-out;
       font-family: Arial, sans-serif;
+      z-index: 1000;
     }
 
     .cart-sidebar.active {
       right: 0;
+    }
+
+    .content-wrapper {
+      transition: margin-right 0.3s ease-in-out;
+    }
+
+    .content-wrapper.shift {
+      margin-right: 300px;
+    }
+
+    body.sidebar-active .content-wrapper {
+      margin-right: 300px;
+      /* Mag-aadjust ito kapag lumabas ang cart sidebar */
     }
 
     .main-content {
@@ -284,6 +298,8 @@
     }
 
     .cart-item {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -310,6 +326,7 @@
       margin-top: 20px;
     }
   </style>
+  <script src="function.js"></script>
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -336,9 +353,9 @@
           let li = document.createElement("li");
           li.classList.add("cart-item");
           li.innerHTML = `
-          <span>${item.name} - PHP ${item.price.toFixed(2)}</span>
-          <button class="remove-btn" onclick="removeItem(${index})">&times;</button>
-        `;
+  <span>${item.name} - PHP ${item.price.toFixed(2)}</span>
+  <button class="remove-btn" onclick="removeItem(${index})">&times;</button>
+  `;
           cartItems.appendChild(li);
           total += item.price;
         });
@@ -370,15 +387,11 @@
     });
   </script>
 
-  
+
 
   <!-- Menu Categories -->
   <section class="menu" id="menu">
 
-    <!-- Categories -->
-     <div class="search-box">
-    <input type="text" id="search" name="Search" placeholder="Search...">
-  </div>
 
     <div class="menu-categories-container">
 
@@ -470,257 +483,6 @@
         <h3>Grilled Mushroom</h3>
         <p>crispy, smoky bacon, melted cheese, and fresh toppings like lettuce, tomato, pickles, and onions.</p>
       </div>
-    </div>
-
-
-    <h2>Salads & Soup</h2>
-    <div class="menu-items">
-      <div class="menu-item salads-soup" data-category="burger" onclick="redirectToDetails">
-        <img src="img/caesar.jpg" alt="burger">
-        <h3>Caesar</h3>
-        <p>Hearty dish made by slow-cooking veal shanks with a flavorful mix of white wine, broth, tomatoes, onions, carrots, celery, garlic, and herbs.</p>
-      </div>
-      <div class="menu-item salads-soup " onclick="redirectToDetails">
-        <img src="img/mango-salad.jfif" alt="Porchetta">
-        <h3>Gorgonzola Mango Salad</h3>
-        <p>Seasoned with garlic, rosemary, fennel, black pepper, and other aromatic herbs.</p>
-      </div>
-      <div class="menu-item salads-soup" onclick="redirectToDetails">
-        <img src="img/insalata.jpg" alt="Fried Calamari">
-        <h3>Insalata Greca</h3>
-        <p>Crispy, golden-brown seafood delicacy made from fresh squid that is lightly battered and deep-fried to perfection.</p>
-      </div>
-      <div class="menu-item salads-soup" onclick="redirectToDetails">
-        <img src="img/kale.jpg" alt="Fried Calamari">
-        <h3>Kale</h3>
-        <p>Crispy, golden-brown seafood delicacy made from fresh squid that is lightly battered and deep-fried to perfection.</p>
-      </div>
-      <div class="menu-item salads-soup" onclick="redirectToDetails">
-        <img src="img/burrata.jpg" alt="Fried Calamari">
-        <h3>Burrata</h3>
-        <p>Crispy, golden-brown seafood delicacy made from fresh squid that is lightly battered and deep-fried to perfection.</p>
-      </div>
-      <div class="menu-item salads-soup" onclick="redirectToDetails">
-        <img src="img/grande.jpg" alt="Fried Calamari">
-        <h3>Insalata Grande</h3>
-        <p> mix of fresh greens, vegetables, proteins, and flavorful toppings.</p>
-      </div>
-      <div class="menu-item salads-soup" onclick="redirectToDetails">
-        <img src="img/giorno.jfif" alt="Fried Calamari">
-        <h3>Zuppa Del Giorno</h3>
-        <p>Soup of the day(daily fresh and nutritious soup)</p>
-      </div>
-      <div class="menu-item salads-soup" onclick="redirectToDetails">
-        <img src="img/mare.webp" alt="Fried Calamari">
-        <h3>Zuppa Di Mare</h3>
-        <p>Mixed seafood, basil, tomato with toasted Bread</p>
-      </div>
-      <div class="menu-item salads-soup" onclick="redirectToDetails">
-        <img src="img/fungi.jpg" alt="Fried Calamari">
-        <h3>Zuppa Di Fungi</h3>
-        <p>Cream of Mushroom</p>
-      </div>
-    </div>
-
-
-    <h2>pizza</h2>
-    <div class="menu-items">
-      <div class="menu-item pizza" data-category="pizza" onclick="redirectToDetails">
-        <img src="img/image1.png" alt="burger">
-        <h3>Burrata Con Mortadella</h3>
-        <p>Whole burrata, Mortadella, pesto, walnuts and mozzarella cheese</p>
-      </div>
-      <div class="menu-item pizza" onclick="redirectToDetails">
-        <img src="img/image2.png" alt="Porchetta">
-        <h3>Proscitutto E Gorgonzola</h3>
-        <p>Gorgonzola, tomato, mozzarella and parma ham</p>
-      </div>
-      <div class="menu-item pizza" onclick="redirectToDetails">
-        <img src="img/metroPizza.jfif" alt="Fried Calamari">
-        <h3>Metro</h3>
-        <p>(1/2meter) mozzarella, parmesan, provolone cheese, chopped tomato and arugula</p>
-      </div>
-      <div class="menu-item pizza" onclick="redirectToDetails">
-        <img src="img/cacciatore.jfif" alt="Fried Calamari">
-        <h3>Cacciatore</h3>
-        <p>Wild salami, anchovies, Gorgonzola cheese, mozzarella and tomato</p>
-      </div>
-      <div class="menu-item pizza" onclick="redirectToDetails">
-        <img src="img/allmeat.jpg" alt="Fried Calamari">
-        <h3>All Meat</h3>
-        <p>Ham, salami, sausage, bacon, mozzarella and tomato</p>
-      </div>
-      <div class="menu-item pizza" onclick="redirectToDetails">
-        <img src="img/fourcheese.jpg" alt="Fried Calamari">
-        <h3>Four Cheese</h3>
-        <p>Gorgonzola, parmesan, taleggio, mozzarella and tomato</p>
-      </div>
-      <div class="menu-item pizza" onclick="redirectToDetails">
-        <img src="img/bianca.jpg" alt="Fried Calamari">
-        <h3>Bianca</h3>
-        <p>Special cream cheese, mozzarella, parmesan with Mortadella</p>
-      </div>
-      <div class="menu-item pizza" onclick="redirectToDetails">
-        <img src="img/pepperoni.jpg" alt="Fried Calamari">
-        <h3>Pepperoni</h3>
-        <p>Spicy salami, mozzarella and tomato</p>
-      </div>
-      <div class="menu-item pizza" onclick="redirectToDetails">
-        <img src="img/pizzaDeMare.jpg" alt="Fried Calamari">
-        <h3>Pizza Di Mare</h3>
-        <p>Seafood, tomato and mozzarella garlic</p>
-      </div>
-      <div class="menu-item pizza" onclick="redirectToDetails">
-        <img src="img/calzone.jpg" alt="Fried Calamari">
-        <h3>Calzone</h3>
-        <p>Folded pizza stuffed with ricotta and spinach and salmon gralax</p>
-      </div>
-      <div class="menu-item pizza" onclick="redirectToDetails">
-        <img src="img/milano.jpg" alt="Fried Calamari">
-        <h3>Milano</h3>
-        <p>Cream Cheese mascarpone ricotta cheese, mozzarella and spinach</p>
-      </div>
-      <div class="menu-item pizza" onclick="redirectToDetails">
-        <img src="img/verdure.jfif" alt="Fried Calamari">
-        <h3>Verdure</h3>
-        <p>Grilled vegetables, tomato, and mozzarella</p>
-      </div>
-      <div class="menu-item pizza" onclick="redirectToDetails">
-        <img src="img/salsiccia.jfif" alt="Fried Calamari">
-        <h3>Salsiccia</h3>
-        <p>Italian pork sausage, mushroom, arugula, tomato, mozzarella and truffle aroma</p>
-      </div>
-      <div class="menu-item pizza" onclick="redirectToDetails">
-        <img src="img/scatola.jfif" alt="Fried Calamari">
-        <h3>Scatola</h3>
-        <p>Pesto sauce, mozzarella, capers and corned spicy tuna</p>
-      </div>
-      <div class="menu-item pizza" onclick="redirectToDetails">
-        <img src="img/margherita.jfif" alt="Fried Calamari">
-        <h3>Margherita</h3>
-        <p>White mozzarella, basil, oregano, and extra virgin olive oil</p>
-      </div>
-    </div>
-
-
-    <h2>Pasta</h2>
-    <div class="menu-items">
-      <div class="menu-item pasta" onclick="redirectToDetails">
-        <img src="img/spaghettiGamberiNeri.jpg" alt="Fried Calamari">
-        <h3>Spaghetti Ai Gamberi neri</h3>
-        <p>Black pasta with big mussels, shrimp in white wine and eggplant sauce</p>
-      </div>
-      <div class="menu-item pasta" onclick="redirectToDetails">
-        <img src="img/spaghettiDeMareAlPesto.jpg" alt="Fried Calamari">
-        <h3>Spaghetti De Mare Al Pesto</h3>
-        <p>Pasta mixed with seafood, mushroom, dried porcini cream and homemade pesto</p>
-      </div>
-      <div class="menu-item pasta" onclick="redirectToDetails">
-        <img src="img/spaghettiAllaCarbonara.jpg" alt="Fried Calamari">
-        <h3>Spaghetti Alla Carbonara</h3>
-        <p>Authentic Italian pasta with crispy panetta parmesan eggyolk</p>
-      </div>
-      <div class="menu-item pasta" onclick="redirectToDetails">
-        <img src="img/spaghettiMareBasilico.jpg" alt="Fried Calamari">
-        <h3>Spaghetti Mare Basilico</h3>
-        <p>Pasta with seafood, white wine, basil and tomato sauce</p>
-      </div>
-      <div class="menu-item pasta" onclick="redirectToDetails">
-        <img src="img/linguineVongole.jpg" alt="Fried Calamari">
-        <h3>Linguine Vongole</h3>
-        <p>Pasta with clams in white wine, garlic, parsley and olive oil sauce</p>
-      </div>
-      <div class="menu-item pasta" onclick="redirectToDetails">
-        <img src="img/spaghettiAglioOlioGamberiti.jpg" alt="Fried Calamari">
-        <h3>Spaghetti Aglio Olio Gamberiti</h3>
-        <p>Pasta mixed with garlic, green pepper, shrimps, parsley and olive oil sauce</p>
-      </div>
-      <div class="menu-item pasta" onclick="redirectToDetails">
-        <img src="img/linguineTartufo.jpg" alt="Fried Calamari">
-        <h3>Linguini Tartufo</h3>
-        <p>Pasta mixed with dried porcini mushroom in white truffle aroma cream sauce</p>
-      </div>
-      <div class="menu-item pasta" onclick="redirectToDetails">
-        <img src="img/fettucineConSalsiccia.jfif" alt="Fried Calamari">
-        <h3>Fettuccine Con Salsiccia</h3>
-        <p>Flat pasta with olives, pancetta and italian sausage in tomato sauce and parmesan</p>
-      </div>
-      <div class="menu-item pasta" onclick="redirectToDetails">
-        <img src="img/rigatoniAnelioRagu.jpg" alt="Fried Calamari">
-        <h3>Rigatoni anello ragu</h3>
-        <p>Stewed lamb in mascarpone cream sauce</p>
-      </div>
-      <div class="menu-item pasta" onclick="redirectToDetails">
-        <img src="img/penneScampi.jpg" alt="Fried Calamari">
-        <h3>Penne Scampi</h3>
-        <p>Tube pasta in tomato, mixed cherry tomato, white wine and mushroom</p>
-      </div>
-      <div class="menu-item pasta" onclick="redirectToDetails">
-        <img src="img/pastaAlaPutanesca.jpg" alt="Fried Calamari">
-        <h3>Spaghetti Ala Putanesca</h3>
-        <p>pasta, garlic, capers, anchovies, olives, basil and tomato sauce</p>
-      </div>
-      <div class="menu-item pasta" onclick="redirectToDetails">
-        <img src="img/spaghettiEpepe.jfif" alt="Fried Calamari">
-        <h3>Spaghetti Cacio e Pepe</h3>
-        <p>Crushed pepper corn with butter, olivr oil, parsley and pecorino cheese</p>
-      </div>
-      <div class="menu-item pasta" onclick="redirectToDetails">
-        <img src="img/peneArriabbiata.jpg" alt="Fried Calamari">
-        <h3>Penne Arrabiata</h3>
-        <p>Tube pasta in aged parmesan with dried porcini, green and red chilly and light spicy sauce</p>
-      </div>
-      <div class="menu-item pasta" onclick="redirectToDetails">
-        <img src="img/GnocchiQuatro.jfif" alt="Fried Calamari">
-        <h3>Gnocchi Quattro Formaggio</h3>
-        <p>Homemade Potato dumplings with spinach in four cheese sauce</p>
-      </div>
-      <div class="menu-item pasta" onclick="redirectToDetails">
-        <img src="img/img/img/img/img/img/img/img/ravioliSpinachi.jpg" alt="Fried Calamari">
-        <h3>Ravioli Spinach Formaggio</h3>
-        <p>Filled Ravioli with spinach ricotta parmesan in basil toamto sauce</p>
-      </div>
-      <div class="menu-item pasta" onclick="redirectToDetails">
-        <img src="img/img/img/img/img/img/img/beefLasagna.jpg" alt="Fried Calamari">
-        <h3>Beef Lasagna</h3>
-        <p>Flat layered pasta with US angus beef in mozzarella and bechamel sauce</p>
-      </div>
-      <div class="menu-item pasta" onclick="redirectToDetails">
-        <img src="img/img/img/img/img/img/zucchiniEggplant.jfif" alt="Fried Calamari">
-        <h3>Zucchini and Eggplant</h3>
-        <p>layered Zucchini and Eggplant with tomato. mozzarella and taleggio cheese</p>
-      </div>
-      <div class="menu-item pasta" onclick="redirectToDetails">
-        <img src="img/img/img/img/img/bakedZitti.jfif" alt="Fried Calamari">
-        <h3>Baked Ziti</h3>
-        <p>Tube pasta with ricotta cheese and baked tomato parmesan and mozzarella cheese</p>
-      </div>
-    </div>
-
-
-    <h2>Dessert</h2>
-    <div class="menu-items">
-      <div class="menu-item dessert" data-category="burger" onclick="redirectToDetails">
-        <img src="img/img/img/img/tiramisu.jfif" alt="burger">
-        <h3>Tiramisu</h3>
-        <p>Tiramisu cake is a classic Italian dessert made with layers of coffee-soaked ladyfingers (savoiardi) and a rich, creamy mascarpone filling.</p>
-      </div>
-      <div class="menu-item dessert" onclick="redirectToDetails">
-        <img src="img/img/img/cheesecaka.jpg" alt="Porchetta">
-        <h3>Cheese cake</h3>
-        <p>Cheesecake is a rich, creamy dessert made with a smooth mixture of cream cheese, sugar, and eggs, typically set on a crust made of crushed cookies or graham crackers.</p>
-      </div>
-      <div class="menu-item dessert" onclick="redirectToDetails">
-        <img src="img/img/red velvet.jpg" alt="Fried Calamari">
-        <h3>Red Velvet</h3>
-        <p>Red velvet cake is a soft, moist, and mildly chocolate-flavored cake known for its vibrant red color and velvety texture.</p>
-      </div>
-      <div class="menu-item dessert" onclick="redirectToDetails">
-        <img src="img/chocolatecake.jpg" alt="Fried Calamari">
-        <h3>Chocolate Cake</h3>
-        <p>Chocolate cake is a rich, moist dessert made with cocoa powder or melted chocolate, giving it a deep, indulgent flavor.</p>
-      </div>
-
     </div>
   </section>
 
